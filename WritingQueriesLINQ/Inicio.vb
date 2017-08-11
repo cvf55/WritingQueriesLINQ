@@ -3,6 +3,8 @@
 Module Inicio
 
     Sub Main()
+        Dim dFecha As Date = Date.Now
+
         ' Crear una lista de studiantes
         Dim students = GetStudents()
 
@@ -14,12 +16,21 @@ Module Inicio
         Dim studentQuery = From currentStudent In students
                            Where currentStudent.Rank <= 10
                            Select currentStudent
+                           Order By currentStudent.Last Ascending, currentStudent.First Ascending
 
         'Recorermos la consulta
+        Console.Clear()
+        Debug.AutoFlush = True
+
+        Debug.Print("Comenzamos " & Format(dFecha, "yyyyMMdd hh:mm:ss"))
+        Debug.Indent()
         For Each studentRecord In studentQuery
             Console.WriteLine(studentRecord.Last & ", " & studentRecord.First)
-            'Debug.Print(studentRecord.Last & ", " & studentRecord.First)
+            Debug.Print(studentRecord.Last & ", " & studentRecord.First)
         Next
+        Debug.Unindent()
+        Debug.Print("Finalizamos " & Format(dFecha, "yyyyMMdd hh:mm:ss"))
+
     End Sub
 
     ''' <summary>
